@@ -1,5 +1,8 @@
 const container = document.querySelector('.container');
 const resizeGrid = document.getElementById("size_buton");
+const RGBSelector = document.getElementById("rgb_color");
+const resetButton = document.getElementById("reset");
+
 
 function creategrid(){
     for(let i=0; i <256; i++){
@@ -15,7 +18,6 @@ function hover(){
     grids.forEach(grid => 
         grid.addEventListener('mouseenter',function(){
             grid.style.cssText = "background-color: black;" 
-            console.log('changed!!!');
     }));
 }
 
@@ -43,10 +45,32 @@ function changeGrid(){
     hover();
 }
 
+function changeToRGB(){
+    const grids = document.querySelectorAll('.grid');
+    
+    grids.forEach(grid => 
+        grid.addEventListener('mouseenter',function(){
+            
+            let r = Math.floor((Math.random() * 255) + 1);
+            let g = Math.floor((Math.random() * 255) + 1);
+            let b = Math.floor((Math.random() * 255) + 1);
+            
+            grid.style.background = `rgb(${r}, ${g}, ${b})`;
+    }));
+}
+
+function reset(){
+    const grids = document.querySelectorAll('.grid');
+
+    grids.forEach(grid =>
+        grid.style.backgroundColor = 'lightgrey'
+    );
+}
 
 creategrid();
 hover();
 
-
 // event listenning
 resizeGrid.addEventListener('click',changeGrid);
+RGBSelector.addEventListener('click',changeToRGB);
+resetButton.addEventListener('click',reset);
